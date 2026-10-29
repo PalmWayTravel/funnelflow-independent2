@@ -1,0 +1,72 @@
+{
+  "name": "Integration",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "enum": [
+        "meta_lead_ads",
+        "stripe",
+        "barion",
+        "webhook"
+      ],
+      "title": "Provider"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "connected",
+        "disconnected",
+        "error"
+      ],
+      "default": "disconnected",
+      "title": "Status"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "token": {
+      "type": "string",
+      "title": "Webhook token"
+    },
+    "webhook_url": {
+      "type": "string",
+      "title": "Webhook URL"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced"
+    },
+    "config": {
+      "type": "string",
+      "title": "Config"
+    }
+  },
+  "required": [
+    "provider"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

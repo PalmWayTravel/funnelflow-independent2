@@ -1,0 +1,113 @@
+{
+  "name": "Booking",
+  "properties": {
+    "account_id": {
+      "title": "Account",
+      "type": "string"
+    },
+    "booking_type_id": {
+      "title": "Id\u0151pont t\u00edpusa",
+      "type": "string"
+    },
+    "contact_id": {
+      "title": "Kontakt",
+      "type": "string"
+    },
+    "email": {
+      "title": "E-mail",
+      "type": "string"
+    },
+    "end": {
+      "format": "date-time",
+      "title": "Befejez\u00e9s",
+      "type": "string"
+    },
+    "google_event_id": {
+      "title": "Google Napt\u00e1r esem\u00e9ny",
+      "type": "string"
+    },
+    "meeting_link": {
+      "title": "Tal\u00e1lkoz\u00f3 link",
+      "type": "string"
+    },
+    "name": {
+      "title": "N\u00e9v",
+      "type": "string"
+    },
+    "note": {
+      "title": "Megjegyz\u00e9s",
+      "type": "string"
+    },
+    "phone": {
+      "title": "Telefon",
+      "type": "string"
+    },
+    "source": {
+      "default": "booking_page",
+      "title": "Forr\u00e1s",
+      "type": "string"
+    },
+    "start": {
+      "format": "date-time",
+      "title": "Kezd\u00e9s",
+      "type": "string"
+    },
+    "status": {
+      "default": "confirmed",
+      "enum": [
+        "confirmed",
+        "cancelled",
+        "completed"
+      ],
+      "title": "\u00c1llapot",
+      "type": "string"
+    }
+  },
+  "required": [
+    "start"
+  ],
+  "type": "object",
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

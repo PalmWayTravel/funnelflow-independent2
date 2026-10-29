@@ -1,0 +1,27 @@
+{
+  "auth": "oauth",
+  "login_path": null,
+  "consent_path": null,
+  "tools": {
+    "excluded_agents": [],
+    "entity_overrides": {
+      "Integration": {
+        "operations": [],
+        "description": null
+      },
+      "Automation": {
+        "operations": [],
+        "description": null
+      },
+      "Contract": {
+        "operations": [],
+        "description": null
+      },
+      "Offer": {
+        "operations": [],
+        "description": null
+      }
+    },
+    "functions": []
+  }
+}

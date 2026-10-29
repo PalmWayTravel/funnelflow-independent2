@@ -1,0 +1,172 @@
+{
+  "name": "Contact",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account",
+      "rls": {
+        "write": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    },
+    "name": {
+      "type": "string",
+      "title": "N\u00e9v"
+    },
+    "email": {
+      "type": "string",
+      "title": "E-mail"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Telefon"
+    },
+    "company": {
+      "type": "string",
+      "title": "C\u00e9gn\u00e9v"
+    },
+    "industry": {
+      "type": "string",
+      "title": "Ipar\u00e1g"
+    },
+    "source": {
+      "type": "string",
+      "default": "Website",
+      "title": "Forr\u00e1s"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "title": "C\u00edmk\u00e9k"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Jegyzetek"
+    },
+    "marketing_consent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Marketing hozz\u00e1j\u00e1rul\u00e1s",
+      "rls": {
+        "write": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    },
+    "unsubscribed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Leiratkozott",
+      "rls": {
+        "write": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    },
+    "unsubscribe_token": {
+      "type": "string",
+      "title": "Leiratkoz\u00e1si k\u00f3d"
+    },
+    "stage_id": {
+      "type": "string",
+      "title": "Pipeline f\u00e1zis"
+    },
+    "owner_id": {
+      "type": "string",
+      "title": "Felel\u0151s"
+    },
+    "activity": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "title": "Aktivit\u00e1s"
+    },
+    "setting_answers": {
+      "type": "array",
+      "default": [],
+      "title": "Setting k\u00e9rd\u00e9sek",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "last_contacted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Utols\u00f3 megkeres\u00e9s"
+    },
+    "last_message_status": {
+      "type": "string",
+      "title": "Utols\u00f3 \u00fczenet st\u00e1tusz"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

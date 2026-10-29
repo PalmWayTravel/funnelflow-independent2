@@ -1,0 +1,92 @@
+{
+  "name": "WorkspaceSettings",
+  "type": "object",
+  "properties": {
+    "email_from_name": {
+      "type": "string",
+      "title": "E-mail felad\u00f3 n\u00e9v"
+    },
+    "email_from_email": {
+      "type": "string",
+      "title": "E-mail felad\u00f3 c\u00edm"
+    },
+    "email_domain": {
+      "type": "string",
+      "title": "Saj\u00e1t domain"
+    },
+    "booking_email_subject": {
+      "type": "string",
+      "title": "Foglal\u00e1s e-mail t\u00e1rgy"
+    },
+    "booking_email_body": {
+      "type": "string",
+      "title": "Foglal\u00e1s e-mail sz\u00f6veg"
+    },
+    "sms_from_name": {
+      "type": "string",
+      "title": "SMS felad\u00f3 n\u00e9v"
+    },
+    "sms_provider": {
+      "type": "string",
+      "default": "default",
+      "title": "SMS szolg\u00e1ltat\u00f3"
+    },
+    "sms_enabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "SMS k\u00fcld\u00e9s enged\u00e9lyezve"
+    },
+    "meta_business_id": {
+      "type": "string",
+      "title": "Meta Business Manager azonos\u00edt\u00f3 (partner hozz\u00e1f\u00e9r\u00e9shez)"
+    },
+    "notify_new_contact": {
+      "type": "boolean",
+      "default": true,
+      "title": "\u00c9rtes\u00edt\u00e9s \u00faj kontaktn\u00e1l"
+    },
+    "notify_new_booking": {
+      "type": "boolean",
+      "default": true,
+      "title": "\u00c9rtes\u00edt\u00e9s \u00faj foglal\u00e1sn\u00e1l"
+    },
+    "notify_complaint": {
+      "type": "boolean",
+      "default": true,
+      "title": "\u00c9rtes\u00edt\u00e9s panaszn\u00e1l"
+    },
+    "notify_daily_summary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Napi \u00f6sszefoglal\u00f3"
+    },
+    "default_stages_seeded": {
+      "type": "boolean",
+      "default": false,
+      "title": "Alap f\u00e1zisok l\u00e9trehozva"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

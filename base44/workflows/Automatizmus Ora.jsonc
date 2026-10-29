@@ -1,0 +1,47 @@
+{
+  "description": "10 percenk\u00e9nt futtatja az automatiz\u00e1ci\u00f3s sorokat: a lej\u00e1rt v\u00e1rakoz\u00e1sokat folytatja, \u00e9s kiosztja a k\u00f6zelg\u0151 foglal\u00e1sok eml\u00e9keztet\u0151it. \u00cdgy a sorozatok akkor is haladnak, amikor \u00e9pp senki sem haszn\u00e1lja az appot.",
+  "name": "Automatizmus \u00f3ra",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "automation_clock",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_automation_queue": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "crmAutomationEngine",
+            "args": {
+              "action": "process"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Automatiz\u00e1ci\u00f3s sorok futtat\u00e1sa",
+            "description": "Lej\u00e1rt v\u00e1rakoz\u00e1sok \u00e9s foglal\u00e1s-eml\u00e9keztet\u0151k"
+          }
+        }
+      }
+    ]
+  },
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "*/10 * * * *",
+      "one_time_date": null,
+      "timezone": "Europe/Budapest",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  }
+}

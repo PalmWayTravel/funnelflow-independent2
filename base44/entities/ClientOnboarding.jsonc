@@ -1,0 +1,119 @@
+{
+  "name": "ClientOnboarding",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "title": "Felhaszn\u00e1l\u00f3"
+    },
+    "user_email": {
+      "type": "string",
+      "title": "E-mail"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "completed"
+      ],
+      "default": "in_progress",
+      "title": "Onboarding \u00e1llapota"
+    },
+    "tour_completed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bemutat\u00f3 megtekintve"
+    },
+    "has_meta_account": {
+      "type": "boolean",
+      "default": false,
+      "title": "Van Meta hirdet\u00e9si fi\u00f3k"
+    },
+    "meta_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending_review",
+        "connected",
+        "help_requested"
+      ],
+      "default": "not_started",
+      "title": "Meta kapcsolat \u00e1llapota"
+    },
+    "meta_ad_account_id": {
+      "type": "string",
+      "title": "Hirdet\u00e9si fi\u00f3k azonos\u00edt\u00f3"
+    },
+    "meta_ad_account_name": {
+      "type": "string",
+      "title": "Hirdet\u00e9si fi\u00f3k neve"
+    },
+    "meta_business_id": {
+      "type": "string",
+      "title": "Business Manager azonos\u00edt\u00f3"
+    },
+    "meta_page_name": {
+      "type": "string",
+      "title": "Facebook oldal"
+    },
+    "meta_note": {
+      "type": "string",
+      "title": "Megjegyz\u00e9s"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Befejezve"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

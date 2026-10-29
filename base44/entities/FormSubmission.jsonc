@@ -1,0 +1,47 @@
+{
+  "name": "FormSubmission",
+  "type": "object",
+  "properties": {
+    "form_def_id": {
+      "type": "string",
+      "title": "\u0170rlap"
+    },
+    "contact_id": {
+      "type": "string",
+      "title": "Kontakt"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "payload": {
+      "type": "string",
+      "title": "Bek\u00fcld\u00f6tt adatok"
+    }
+  },
+  "required": [
+    "form_def_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

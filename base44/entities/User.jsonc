@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "A felhaszn\u00e1l\u00f3 szerepk\u00f6re az alkalmaz\u00e1sban",
+      "enum": [
+        "admin",
+        "user"
+      ]
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account",
+      "rls": {
+        "write": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "name": "User",
+  "type": "object"
+}

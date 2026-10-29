@@ -1,0 +1,65 @@
+{
+  "name": "PipelineStage",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "name": {
+      "type": "string",
+      "title": "F\u00e1zis neve"
+    },
+    "emoji": {
+      "type": "string",
+      "title": "Emoji"
+    },
+    "order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sorrend"
+    },
+    "color": {
+      "type": "string",
+      "default": "#8549DE",
+      "title": "Sz\u00edn"
+    },
+    "is_final": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lez\u00e1r\u00f3 f\u00e1zis"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

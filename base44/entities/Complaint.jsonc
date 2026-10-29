@@ -1,0 +1,80 @@
+{
+  "name": "Complaint",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "client_id": {
+      "type": "string",
+      "title": "Client"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "in_progress",
+        "resolved"
+      ],
+      "default": "open",
+      "title": "Status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium",
+      "title": "Priorit\u00e1s"
+    },
+    "category": {
+      "type": "string",
+      "title": "Kateg\u00f3ria"
+    },
+    "agent_summary": {
+      "type": "string",
+      "title": "Asszisztens \u00f6sszefoglal\u00f3"
+    },
+    "draft_response": {
+      "type": "string",
+      "title": "V\u00e1laszjavaslat"
+    },
+    "triaged_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Feldolgozva"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

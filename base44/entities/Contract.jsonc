@@ -1,0 +1,232 @@
+{
+  "name": "Contract",
+  "properties": {
+    "body": {
+      "title": "Szerz\u0151d\u00e9s sz\u00f6vege (m\u00e1solat)",
+      "type": "string"
+    },
+    "booking_id": {
+      "title": "Foglal\u00e1s",
+      "type": "string"
+    },
+    "checkout_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Stripe checkout azonos\u00edt\u00f3k (r\u00e9gi)",
+      "type": "array"
+    },
+    "consent_text": {
+      "title": "Elfogad\u00f3 nyilatkozat",
+      "type": "string"
+    },
+    "contact_company": {
+      "title": "C\u00e9gn\u00e9v (m\u00e1solat)",
+      "type": "string"
+    },
+    "contact_email": {
+      "title": "Kontakt e-mail (m\u00e1solat)",
+      "type": "string"
+    },
+    "contact_id": {
+      "title": "Kontakt",
+      "type": "string"
+    },
+    "contact_name": {
+      "title": "Kontakt neve (m\u00e1solat)",
+      "type": "string"
+    },
+    "content_hash": {
+      "title": "Dokumentum hash",
+      "type": "string"
+    },
+    "decline_reason": {
+      "title": "Elutas\u00edt\u00e1s oka",
+      "type": "string"
+    },
+    "declined_at": {
+      "format": "date-time",
+      "title": "Elutas\u00edtva",
+      "type": "string"
+    },
+    "description": {
+      "title": "Le\u00edr\u00e1s (m\u00e1solat)",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Lej\u00e1rat",
+      "type": "string"
+    },
+    "monthly_fee": {
+      "default": 0,
+      "title": "Havi d\u00edj (Ft)",
+      "type": "number"
+    },
+    "offer_id": {
+      "title": "Aj\u00e1nlat",
+      "type": "string"
+    },
+    "offer_name": {
+      "title": "Csomag neve (m\u00e1solat)",
+      "type": "string"
+    },
+    "paid_amount": {
+      "default": 0,
+      "title": "Els\u0151 befizet\u00e9s (Ft)",
+      "type": "number"
+    },
+    "paid_at": {
+      "format": "date-time",
+      "title": "Els\u0151 befizet\u00e9s ideje",
+      "type": "string"
+    },
+    "payment_error": {
+      "title": "Fizet\u00e9si hiba",
+      "type": "string"
+    },
+    "payment_log": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Feldolgozott fizet\u00e9sek",
+      "type": "array"
+    },
+    "payment_status": {
+      "default": "none",
+      "enum": [
+        "none",
+        "pending",
+        "paid",
+        "refunded",
+        "failed"
+      ],
+      "title": "Fizet\u00e9si \u00e1llapot",
+      "type": "string"
+    },
+    "payment_synced_at": {
+      "format": "date-time",
+      "title": "Utols\u00f3 fizet\u00e9s-szinkron (r\u00e9gi)",
+      "type": "string"
+    },
+    "payment_url": {
+      "title": "Fizet\u00e9si link (k\u00e9zi tartal\u00e9k)",
+      "type": "string"
+    },
+    "portal_synced_at": {
+      "format": "date-time",
+      "title": "Utols\u00f3 Portal-szinkron",
+      "type": "string"
+    },
+    "prepared_account_id": {
+      "title": "El\u0151k\u00e9sz\u00edtett account",
+      "type": "string"
+    },
+    "refunded_amount": {
+      "default": 0,
+      "title": "Visszat\u00e9r\u00edtve (Ft)",
+      "type": "number"
+    },
+    "send_error": {
+      "title": "E-mail hiba",
+      "type": "string"
+    },
+    "send_status": {
+      "title": "E-mail st\u00e1tusz",
+      "type": "string"
+    },
+    "sent_at": {
+      "format": "date-time",
+      "title": "Elk\u00fcldve",
+      "type": "string"
+    },
+    "services": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Tartalom (m\u00e1solat)",
+      "type": "array"
+    },
+    "setup_fee": {
+      "default": 0,
+      "title": "Setup d\u00edj (Ft)",
+      "type": "number"
+    },
+    "sign_token": {
+      "title": "Al\u00e1\u00edr\u00e1si k\u00f3d",
+      "type": "string"
+    },
+    "sign_url": {
+      "title": "Al\u00e1\u00edr\u00f3 oldal c\u00edme (Portal)",
+      "type": "string"
+    },
+    "signed_at": {
+      "format": "date-time",
+      "title": "Al\u00e1\u00edrva",
+      "type": "string"
+    },
+    "signer_ip": {
+      "title": "Al\u00e1\u00edr\u00f3 IP",
+      "type": "string"
+    },
+    "signer_name": {
+      "title": "Al\u00e1\u00edr\u00f3 neve",
+      "type": "string"
+    },
+    "signer_user_agent": {
+      "title": "Al\u00e1\u00edr\u00f3 b\u00f6ng\u00e9sz\u0151",
+      "type": "string"
+    },
+    "status": {
+      "default": "sent",
+      "enum": [
+        "sent",
+        "viewed",
+        "signed",
+        "declined",
+        "expired",
+        "cancelled"
+      ],
+      "title": "\u00c1llapot",
+      "type": "string"
+    },
+    "subscription_id": {
+      "title": "Stripe el\u0151fizet\u00e9s azonos\u00edt\u00f3",
+      "type": "string"
+    },
+    "viewed_at": {
+      "format": "date-time",
+      "title": "Megnyitva",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contact_id"
+  ],
+  "type": "object",
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

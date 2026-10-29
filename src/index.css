@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 30% 97%;
+    --foreground: 263 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 263 30% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 263 30% 12%;
+    --primary: 258 69% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 250 25% 94%;
+    --secondary-foreground: 263 30% 18%;
+    --muted: 250 20% 95%;
+    --muted-foreground: 260 10% 45%;
+    --accent: 303 52% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 255 30% 90%;
+    --input: 255 30% 90%;
+    --ring: 258 69% 58%;
+    --chart-1: 258 69% 58%;
+    --chart-2: 303 52% 53%;
+    --chart-3: 333 79% 60%;
+    --chart-4: 173 58% 45%;
+    --chart-5: 43 90% 60%;
+    --radius: 0.9rem;
+    --font-heading: 'Sora', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 263 20% 25%;
+    --sidebar-primary: 258 69% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 250 25% 94%;
+    --sidebar-accent-foreground: 263 30% 18%;
+    --sidebar-border: 255 30% 90%;
+    --sidebar-ring: 258 69% 58%;
+  }
+
+  .dark {
+    --background: 255 35% 7%;
+    --foreground: 250 25% 95%;
+    --card: 255 30% 11%;
+    --card-foreground: 250 25% 95%;
+    --popover: 255 30% 11%;
+    --popover-foreground: 250 25% 95%;
+    --primary: 258 69% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 255 25% 16%;
+    --secondary-foreground: 250 25% 95%;
+    --muted: 255 25% 15%;
+    --muted-foreground: 250 15% 65%;
+    --accent: 303 52% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 255 25% 20%;
+    --input: 255 25% 20%;
+    --ring: 258 69% 64%;
+    --chart-1: 258 69% 64%;
+    --chart-2: 303 52% 58%;
+    --chart-3: 333 79% 64%;
+    --chart-4: 173 58% 50%;
+    --chart-5: 43 90% 64%;
+    --sidebar-background: 255 32% 9%;
+    --sidebar-foreground: 250 25% 90%;
+    --sidebar-primary: 258 69% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 255 25% 16%;
+    --sidebar-accent-foreground: 250 25% 95%;
+    --sidebar-border: 255 25% 18%;
+    --sidebar-ring: 258 69% 64%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  /* Native-app feel: no page bounce and no double-tap zoom delay */
+  html, body {
+    overscroll-behavior: none;
+    touch-action: manipulation;
+  }
+  /* Controls and navigation are never selectable or callout-highlighted */
+  button,
+  [role="button"],
+  [role="tab"],
+  nav a,
+  nav button {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  /* Text fields stay fully selectable */
+  input,
+  textarea,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .gradient-brand {
+    background-image: linear-gradient(135deg, #8549DE 0%, #C548C0 50%, #E9498F 100%);
+  }
+  .gradient-brand-soft {
+    background-image: linear-gradient(135deg, rgba(133,73,222,0.12) 0%, rgba(197,72,192,0.12) 50%, rgba(233,73,143,0.12) 100%);
+  }
+  .text-gradient-brand {
+    background-image: linear-gradient(135deg, #8549DE 0%, #C548C0 50%, #E9498F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-card {
+    box-shadow: 0 1px 3px rgba(133,73,222,0.06), 0 8px 24px -12px rgba(133,73,222,0.12);
+  }
+  .dark .shadow-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+  /* Riport "papír" felület: mindig világos, hogy a letöltött PDF nyomtatható legyen */
+  .report-paper {
+    background-color: #ffffff;
+    color: #1c1528;
+    border-color: #e2deed;
+  }
+  .report-paper .text-muted-foreground {
+    color: #6f677e;
+  }
+  .report-paper .border-border {
+    border-color: #e2deed;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+/* Touch devices: small icon buttons and checkboxes get a comfortable 44px tap target */
+@media (pointer: coarse) {
+  .tap-lg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

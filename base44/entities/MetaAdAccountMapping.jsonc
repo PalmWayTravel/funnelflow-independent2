@@ -1,0 +1,71 @@
+{
+  "name": "MetaAdAccountMapping",
+  "type": "object",
+  "properties": {
+    "workspace_id": {
+      "type": "string",
+      "default": "agency",
+      "title": "Workspace"
+    },
+    "ad_account_id": {
+      "type": "string",
+      "title": "Hirdet\u00e9si fi\u00f3k azonos\u00edt\u00f3"
+    },
+    "ad_account_name": {
+      "type": "string",
+      "title": "Hirdet\u00e9si fi\u00f3k neve"
+    },
+    "page_id": {
+      "type": "string",
+      "title": "Facebook oldal azonos\u00edt\u00f3"
+    },
+    "page_name": {
+      "type": "string",
+      "title": "Facebook oldal neve"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "title": "\u00c1llapot"
+    },
+    "last_lead_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Utols\u00f3 lead"
+    },
+    "note": {
+      "type": "string",
+      "title": "Megjegyz\u00e9s"
+    }
+  },
+  "required": [
+    "workspace_id",
+    "ad_account_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Due Date"
+    },
+    "done": {
+      "type": "boolean",
+      "default": false,
+      "title": "Done"
+    },
+    "done_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Done At"
+    },
+    "assigned_to_id": {
+      "type": "string",
+      "title": "Assigned To"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "name": "FormDef",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "name": {
+      "type": "string",
+      "title": "\u0170rlap neve"
+    },
+    "title": {
+      "type": "string",
+      "default": "Kapcsolatfelv\u00e9tel",
+      "title": "C\u00edm"
+    },
+    "description": {
+      "type": "string",
+      "title": "Le\u00edr\u00e1s"
+    },
+    "button_text": {
+      "type": "string",
+      "default": "K\u00fcld\u00e9s",
+      "title": "Gomb sz\u00f6vege"
+    },
+    "accent_color": {
+      "type": "string",
+      "default": "#8549DE",
+      "title": "Kiemel\u0151sz\u00edn"
+    },
+    "success_message": {
+      "type": "string",
+      "default": "K\u00f6sz\u00f6nj\u00fck, hamarosan keres\u00fcnk!",
+      "title": "Sikeres \u00fczenet"
+    },
+    "target_stage_id": {
+      "type": "string",
+      "title": "Besorol\u00e1s f\u00e1zisba"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Akt\u00edv"
+    },
+    "submission_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Kit\u00f6lt\u00e9sek"
+    },
+    "fields": {
+      "type": "array",
+      "default": [],
+      "title": "Mez\u0151k",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "C\u00edmke"
+          },
+          "field_type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "email",
+              "phone",
+              "textarea",
+              "select",
+              "number",
+              "date",
+              "checkbox"
+            ],
+            "title": "T\u00edpus"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "K\u00f6telez\u0151"
+          },
+          "placeholder": {
+            "type": "string",
+            "title": "Placeholder"
+          },
+          "options": {
+            "type": "string",
+            "title": "Opci\u00f3k (vessz\u0151vel)"
+          },
+          "map_to": {
+            "type": "string",
+            "enum": [
+              "name",
+              "email",
+              "phone",
+              "company",
+              "industry",
+              "note",
+              "consent",
+              "none"
+            ],
+            "title": "Kontakt mez\u0151"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

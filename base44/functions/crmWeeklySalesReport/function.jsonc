@@ -1,0 +1,13 @@
+{
+  "name": "crmWeeklySalesReport",
+  "entry": "entry.ts",
+  "automations": [
+    {
+      "type": "scheduled",
+      "name": "weekly_sales_report_monday",
+      "schedule_mode": "recurring",
+      "schedule_type": "cron",
+      "cron_expression": "0 6 * * 1"
+    }
+  ]
+}

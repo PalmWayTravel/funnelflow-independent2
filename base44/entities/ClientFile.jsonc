@@ -1,0 +1,57 @@
+{
+  "name": "ClientFile",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "title": "Client"
+    },
+    "file_name": {
+      "type": "string",
+      "title": "File Name"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL"
+    },
+    "file_type": {
+      "type": "string",
+      "title": "File Type"
+    },
+    "file_size": {
+      "type": "number",
+      "title": "File Size"
+    },
+    "uploaded_by_id": {
+      "type": "string",
+      "title": "Uploaded By"
+    }
+  },
+  "required": [
+    "client_id",
+    "file_name",
+    "file_url"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

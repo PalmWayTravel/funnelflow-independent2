@@ -1,0 +1,75 @@
+{
+  "name": "Client",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "prospect",
+        "inactive"
+      ],
+      "default": "prospect",
+      "title": "Status"
+    },
+    "note": {
+      "type": "string",
+      "title": "Note"
+    },
+    "crm_enabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "CRM Enabled"
+    },
+    "assigned_owner_id": {
+      "type": "string",
+      "title": "Assigned Owner"
+    },
+    "avatar_color": {
+      "type": "string",
+      "default": "#8549DE",
+      "title": "Avatar Color"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

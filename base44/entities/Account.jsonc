@@ -1,0 +1,79 @@
+{
+  "name": "Account",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "N\u00e9v"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "title": "\u00c1llapot"
+    },
+    "industry": {
+      "type": "string",
+      "title": "Ipar\u00e1g"
+    },
+    "contact_email": {
+      "type": "string",
+      "title": "Kapcsolattart\u00f3 e-mail (v\u00e1laszc\u00edm)"
+    },
+    "plan": {
+      "type": "string",
+      "default": "standard",
+      "title": "Csomag"
+    },
+    "send_limit_daily": {
+      "type": "number",
+      "default": 50,
+      "title": "Napi k\u00fcld\u00e9si limit"
+    },
+    "send_limit_monthly": {
+      "type": "number",
+      "default": 500,
+      "title": "Havi k\u00fcld\u00e9si limit"
+    },
+    "user_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "title": "Hozz\u00e1rendelt felhaszn\u00e1l\u00f3k"
+    },
+    "note": {
+      "type": "string",
+      "title": "Megjegyz\u00e9s"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "AdSpend",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "D\u00e1tum"
+    },
+    "amount": {
+      "type": "number",
+      "default": 0,
+      "title": "\u00d6sszeg (Ft)"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "meta"
+      ],
+      "default": "manual",
+      "title": "Forr\u00e1s"
+    },
+    "sync_key": {
+      "type": "string",
+      "title": "Szinkron kulcs"
+    }
+  },
+  "required": [
+    "date",
+    "amount"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.account_id": "{{user.data.account_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

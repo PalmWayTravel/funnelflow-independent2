@@ -1,0 +1,85 @@
+{
+  "name": "AutomationRun",
+  "type": "object",
+  "properties": {
+    "automation_id": {
+      "type": "string",
+      "title": "Automatiz\u00e1ci\u00f3"
+    },
+    "contact_id": {
+      "type": "string",
+      "title": "Kontakt"
+    },
+    "booking_id": {
+      "type": "string",
+      "title": "Foglal\u00e1s"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0,
+      "title": "Aktu\u00e1lis l\u00e9p\u00e9s"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "done",
+        "stopped",
+        "failed"
+      ],
+      "default": "running",
+      "title": "\u00c1llapot"
+    },
+    "next_run_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "K\u00f6vetkez\u0151 fut\u00e1s"
+    },
+    "delay_applied_for": {
+      "type": "number",
+      "default": -1,
+      "title": "K\u00e9sleltet\u00e9s alkalmazva"
+    },
+    "dedupe_key": {
+      "type": "string",
+      "title": "Kulcs"
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "title": "Napl\u00f3"
+    }
+  },
+  "required": [
+    "automation_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

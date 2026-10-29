@@ -1,0 +1,91 @@
+{
+  "name": "MessageLog",
+  "type": "object",
+  "properties": {
+    "contact_id": {
+      "type": "string",
+      "title": "Kontakt"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "marketing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Marketing \u00fczenet"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms"
+      ],
+      "default": "email",
+      "title": "Csatorna"
+    },
+    "to_address": {
+      "type": "string",
+      "title": "C\u00edmzett"
+    },
+    "subject": {
+      "type": "string",
+      "title": "T\u00e1rgy"
+    },
+    "body": {
+      "type": "string",
+      "title": "\u00dczenet"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "queued",
+        "failed"
+      ],
+      "default": "queued",
+      "title": "St\u00e1tusz"
+    },
+    "error": {
+      "type": "string",
+      "title": "Hiba"
+    },
+    "automation_id": {
+      "type": "string",
+      "title": "Automatiz\u00e1ci\u00f3"
+    },
+    "broadcast_id": {
+      "type": "string",
+      "title": "Kamp\u00e1ny"
+    },
+    "booking_id": {
+      "type": "string",
+      "title": "Foglal\u00e1s"
+    }
+  },
+  "required": [
+    "channel"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

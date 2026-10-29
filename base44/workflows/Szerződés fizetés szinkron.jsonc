@@ -1,0 +1,47 @@
+{
+  "description": "5 percenk\u00e9nt lek\u00e9ri a Portal eredm\u00e9nyeit (megnyit\u00e1s, al\u00e1\u00edr\u00e1s, Stripe befizet\u00e9sek, ism\u00e9tl\u0151d\u0151 d\u00edjak, visszat\u00e9r\u00edt\u00e9sek), \u00e9s \u00e1tvezeti a CRM-be: f\u00e1zis, \u00c9rt\u00e9kes\u00edt\u00e9s riport, feladat, e-mailek. \u00cdgy akkor is friss\u00fcl, ha a lead nem t\u00e9r vissza a fizet\u00e9s ut\u00e1ni oldalra.",
+  "name": "Szerz\u0151d\u00e9s fizet\u00e9s szinkron",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "contract_payment_sync",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "sync_contract_payments": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "crmContractSend",
+            "args": {
+              "action": "sync"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Portal eredm\u00e9nyek \u00e1tv\u00e9tele",
+            "description": "Al\u00e1\u00edr\u00e1sok, befizet\u00e9sek \u00e9s visszat\u00e9r\u00edt\u00e9sek \u00e1tvezet\u00e9se a CRM-be"
+          }
+        }
+      }
+    ]
+  },
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "*/5 * * * *",
+      "one_time_date": null,
+      "timezone": "Europe/Budapest",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  }
+}

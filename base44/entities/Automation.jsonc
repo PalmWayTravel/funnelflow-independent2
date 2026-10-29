@@ -1,0 +1,153 @@
+{
+  "name": "Automation",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "name": {
+      "type": "string",
+      "title": "Automatiz\u00e1ci\u00f3 neve"
+    },
+    "marketing": {
+      "type": "boolean",
+      "default": true,
+      "title": "Marketing automatiz\u00e1ci\u00f3"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Akt\u00edv"
+    },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "contact_created",
+        "form_submitted",
+        "stage_changed",
+        "booking_created",
+        "booking_cancelled",
+        "booking_upcoming"
+      ],
+      "default": "contact_created",
+      "title": "Ind\u00edt\u00f3 esem\u00e9ny"
+    },
+    "trigger_stage_id": {
+      "type": "string",
+      "title": "Ind\u00edt\u00f3 f\u00e1zis"
+    },
+    "trigger_form_id": {
+      "type": "string",
+      "title": "Ind\u00edt\u00f3 \u0171rlap"
+    },
+    "trigger_minutes_before": {
+      "type": "number",
+      "default": 60,
+      "title": "Eml\u00e9keztet\u0151 (perc) "
+    },
+    "condition_tag": {
+      "type": "string",
+      "title": "Bel\u00e9p\u00e9si felt\u00e9tel (c\u00edmke)"
+    },
+    "stop_tag": {
+      "type": "string",
+      "title": "Le\u00e1ll\u00edt\u00e1si c\u00edmke"
+    },
+    "run_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Fut\u00e1sok"
+    },
+    "steps": {
+      "type": "array",
+      "default": [],
+      "title": "L\u00e9p\u00e9sek",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "email",
+              "sms",
+              "wait",
+              "tag",
+              "stage",
+              "condition",
+              "notify",
+              "stop"
+            ],
+            "title": "T\u00edpus"
+          },
+          "subject": {
+            "type": "string",
+            "title": "T\u00e1rgy"
+          },
+          "body": {
+            "type": "string",
+            "title": "\u00dczenet"
+          },
+          "days": {
+            "type": "number",
+            "title": "Nap"
+          },
+          "hours": {
+            "type": "number",
+            "title": "\u00d3ra"
+          },
+          "minutes": {
+            "type": "number",
+            "title": "Perc"
+          },
+          "tag": {
+            "type": "string",
+            "title": "C\u00edmke"
+          },
+          "tag_action": {
+            "type": "string",
+            "enum": [
+              "add",
+              "remove"
+            ],
+            "default": "add",
+            "title": "C\u00edmke m\u0171velet"
+          },
+          "stage_id": {
+            "type": "string",
+            "title": "F\u00e1zis"
+          },
+          "message": {
+            "type": "string",
+            "title": "\u00c9rtes\u00edt\u00e9s sz\u00f6vege"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Goals",
+  "type": "object",
+  "properties": {
+    "cash_target": {
+      "type": "number",
+      "default": 7500000,
+      "title": "Cash Target"
+    },
+    "closed_deals_target": {
+      "type": "number",
+      "default": 40,
+      "title": "Closed Deals Target"
+    },
+    "booked_meetings_target": {
+      "type": "number",
+      "default": 260,
+      "title": "Booked Meetings Target"
+    },
+    "monthly_commission": {
+      "type": "number",
+      "default": 240000,
+      "title": "Monthly Commission"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

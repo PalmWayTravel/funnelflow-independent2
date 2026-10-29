@@ -1,0 +1,94 @@
+{
+  "name": "Broadcast",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Kamp\u00e1ny neve"
+    },
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms"
+      ],
+      "default": "email",
+      "title": "Csatorna"
+    },
+    "subject": {
+      "type": "string",
+      "title": "T\u00e1rgy"
+    },
+    "body": {
+      "type": "string",
+      "title": "\u00dczenet"
+    },
+    "audience_stage_id": {
+      "type": "string",
+      "title": "C\u00e9lk\u00f6z\u00f6ns\u00e9g f\u00e1zis"
+    },
+    "audience_tag": {
+      "type": "string",
+      "title": "C\u00e9lk\u00f6z\u00f6ns\u00e9g c\u00edmke"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "sent",
+        "failed"
+      ],
+      "default": "draft",
+      "title": "\u00c1llapot"
+    },
+    "recipient_count": {
+      "type": "number",
+      "default": 0,
+      "title": "C\u00edmzettek"
+    },
+    "sent_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Elk\u00fcldve"
+    },
+    "failed_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Sikertelen"
+    },
+    "sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "K\u00fcld\u00e9s ideje"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

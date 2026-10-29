@@ -1,0 +1,107 @@
+{
+  "name": "BookingType",
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account"
+    },
+    "name": {
+      "type": "string",
+      "title": "Id\u0151pont t\u00edpusa"
+    },
+    "description": {
+      "type": "string",
+      "title": "Le\u00edr\u00e1s"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "default": 30,
+      "title": "Hossz (perc)"
+    },
+    "buffer_minutes": {
+      "type": "number",
+      "default": 10,
+      "title": "Sz\u00fcnet (perc)"
+    },
+    "notice_hours": {
+      "type": "number",
+      "default": 12,
+      "title": "El\u0151zetes bejelentkez\u00e9s (\u00f3ra)"
+    },
+    "days_ahead": {
+      "type": "number",
+      "default": 30,
+      "title": "H\u00e1ny nappal el\u0151re"
+    },
+    "max_per_day": {
+      "type": "number",
+      "default": 6,
+      "title": "Napi maximum"
+    },
+    "meeting_link": {
+      "type": "string",
+      "title": "Tal\u00e1lkoz\u00f3 link (alap)"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Akt\u00edv"
+    },
+    "excluded_dates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "title": "Kiz\u00e1rt napok"
+    },
+    "availability": {
+      "type": "array",
+      "default": [],
+      "title": "Heti el\u00e9rhet\u0151s\u00e9g",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "number",
+            "title": "Nap (1=H\u00e9tf\u0151)"
+          },
+          "from": {
+            "type": "string",
+            "title": "Kezd\u00e9s"
+          },
+          "to": {
+            "type": "string",
+            "title": "Befejez\u00e9s"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
