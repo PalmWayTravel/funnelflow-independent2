@@ -90,3 +90,21 @@ export function callPaymentLink(contractId) {
 export function syncPayments(contractId) {
   return callContractSend({ action: "sync", ...(contractId ? { contract_id: contractId } : {}) });
 }
+
+export function formatDateTime(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleString("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "medium", timeStyle: "short" });
+}
+
+// A nyilvános aláíró/fizető oldal hívása: a hosszú véletlen token az egyetlen azonosító.
+export async function callPortal(payload) {
+  try {
+    const res = await base44.functions.invoke("portalPublic", payload);
+    if (res.data?.error) throw new Error(res.data.error);
+    return res.data;
+  } catch (e) {
+    throw new Error(errorMessage(e));
+  }
+}

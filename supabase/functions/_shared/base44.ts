@@ -228,3 +228,35 @@ export function createClientFromRequest(req: Request) {
     },
   };
 }
+
+// ---- Rendszerhívások (ütemező és függvények egymás között) ---------------------
+function serviceClient() {
+  return createClient(SB_URL, SB_SERVICE, { auth: { persistSession: false, autoRefreshToken: false } });
+}
+
+async function systemSecret(): Promise<string> {
+  const { data } = await serviceClient().rpc('cron_secret');
+  return typeof data === 'string' ? data : '';
+}
+
+// Igaz, ha a kérés a rendszer saját titkát hozza (ütemező vagy másik függvény).
+export async function isSystemRequest(req: Request): Promise<boolean> {
+  const given = req.headers.get('x-cron-secret') || '';
+  if (!given) return false;
+  const secret = await systemSecret();
+  if (secret.length < 32 || given.length !== secret.length) return false;
+  let diff = 0;
+  for (let i = 0; i < secret.length; i += 1) diff |= given.charCodeAt(i) ^ secret.charCodeAt(i);
+  return diff === 0;
+}
+
+// Másik Edge Function hívása rendszerjogosultsággal.
+export async function callFunctionAsSystem(name: string, body: unknown = {}) {
+  const res = await fetch(`${SB_URL}/functions/v1/${name}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${SB_SERVICE}`, 'x-cron-secret': await systemSecret(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json().catch(() => ({}));
+  return { ok: res.ok, status: res.status, json };
+}

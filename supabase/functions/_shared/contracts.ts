@@ -1,4 +1,4 @@
-import { secrets } from "./base44.ts";
+import { secrets, callFunctionAsSystem } from "./base44.ts";
 import { budapestIsoDate, appendActivity, sendEmail, formatLocalDateTime } from "./crm.ts";
 
 // A szerződések CRM-oldali logikája. Az aláírás és a fizetés a külön, nyilvános FunnelFlow Portal
@@ -82,32 +82,23 @@ export async function notifyAdminEmails(base44, subject, text) {
 
 // ---- A Portal app elérése ------------------------------------------------------------------
 
+// A Portal (aláírás + fizetés) ugyanebben a Supabase projektben fut (portalPublic / portalAdmin
+// függvények), ezért nincs külön app: a CRM rendszerjogosultsággal hívja, a lead linkje pedig
+// a felület saját /s/:token oldala.
 export function portalConfig() {
-  const url = String(secrets.get("PORTAL_URL") || "").trim().replace(/\/+$/, "");
-  const appId = String(secrets.get("PORTAL_APP_ID") || "").trim();
-  const secret = String(secrets.get("PORTAL_SECRET") || "").trim();
-  return { url, appId, secret, ok: !!(url && appId && secret.length >= 32) };
+  const url = String(secrets.get("APP_URL") || "").trim().replace(/\/+$/, "");
+  return { url, ok: !!url };
 }
-
 export function portalSignUrl(token) {
   return `${portalConfig().url}/s/${token}`;
 }
-
-// Szerver-szerver hívás a Portal admin függvényére. A titok csak fejlécben utazik.
 export async function portalCall(action, data = {}) {
   const cfg = portalConfig();
-  if (!cfg.ok) throw new Error("A Portal app még nincs bekötve (PORTAL_URL, PORTAL_APP_ID, PORTAL_SECRET).");
-  const res = await fetch(`${cfg.url}/api/apps/${cfg.appId}/functions/portalAdmin`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Portal-Secret": cfg.secret },
-    body: JSON.stringify({ action, ...data }),
-  });
-  const json = await res.json().catch(() => ({}));
-  if (!res.ok || json.error) throw new Error(json.error || `A Portal nem válaszolt rendben (${res.status}).`);
-  return json;
+  if (!cfg.ok) throw new Error("Hiányzik az APP_URL beállítás, ezért a szerződés linkje nem készíthető el.");
+  const res = await callFunctionAsSystem("portalAdmin", { action, ...data });
+  if (!res.ok || res.json.error) throw new Error(res.json.error || `A Portal nem válaszolt rendben (${res.status}).`);
+  return res.json;
 }
-
-// Ami a CRM-ből a Portalra kerül: a szerződés pillanatnyi, változtathatatlan másolata.
 export function toPortalPayload(c) {
   return {
     crm_contract_id: String(c.id),

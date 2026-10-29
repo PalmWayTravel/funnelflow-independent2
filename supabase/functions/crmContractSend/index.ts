@@ -71,7 +71,7 @@ async function handler(req) {
     // ---- Stripe állapot a Portalban (csak olvasás) -----------------------
     if (action === 'payments_status') {
       if (!portalConfig().ok) {
-        return Response.json({ connected: null, portal: false, error: 'A Portal app még nincs bekötve (PORTAL_URL, PORTAL_APP_ID, PORTAL_SECRET).' });
+        return Response.json({ connected: null, portal: false, error: 'Az APP_URL beállítás hiányzik.' });
       }
       try {
         const r = await portalCall('payments_state');
@@ -83,7 +83,7 @@ async function handler(req) {
 
     // ---- a Portal eredményeinek átvétele (kézi gomb és időzített futás) ----
     if (action === 'sync') {
-      if (!portalConfig().ok) return Response.json({ error: 'A Portal app még nincs bekötve.' }, { status: 503 });
+      if (!portalConfig().ok) return Response.json({ error: 'Az APP_URL beállítás hiányzik.' }, { status: 503 });
       try {
         const r = await syncPortalContracts(base44, { contractId: clean(body.contract_id, 64), force: body.force === true });
         return Response.json({ ok: true, checked: r.checked, recorded: r.applied });
@@ -165,7 +165,7 @@ async function handler(req) {
 
     // ---- új szerződés ---------------------------------------------------
     if (!portalConfig().ok) {
-      return Response.json({ error: 'A Portal app még nincs bekötve, ezért a szerződés nem küldhető (PORTAL_URL, PORTAL_APP_ID, PORTAL_SECRET).' }, { status: 503 });
+      return Response.json({ error: 'Az APP_URL beállítás hiányzik, ezért a szerződés nem küldhető.' }, { status: 503 });
     }
     const contact = await base44.asServiceRole.entities.Contact.get(clean(body.contact_id, 64)).catch(() => null);
     if (!contact) return Response.json({ error: 'A kontakt nem található' }, { status: 404 });

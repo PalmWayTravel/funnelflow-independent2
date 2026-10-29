@@ -38,6 +38,7 @@ import ClientLeads from '@/pages/ClientLeads';
 import ClientAutomations from '@/pages/ClientAutomations';
 import Unsubscribe from '@/pages/Unsubscribe';
 import Contracts from '@/pages/Contracts';
+import SignContract from '@/pages/SignContract';
 import AccountGate from '@/components/AccountGate';
 import AdminOnly from '@/components/AdminOnly';
 import HomeRedirect from '@/components/HomeRedirect';
@@ -83,6 +84,7 @@ const AuthenticatedApp = () => {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/oauth/consent" element={<OAuthConsent />} />
       <Route path="/u/:token" element={<Unsubscribe />} />
+      <Route path="/s/:token" element={<SignContract />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route element={<AccountGate />}>
           <Route path="/onboarding" element={<Onboarding />} />
