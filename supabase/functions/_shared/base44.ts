@@ -171,7 +171,6 @@ export function createClientFromRequest(req: Request) {
   const authz = req.headers.get('authorization') || '';
   const bearer = authz.replace(/^Bearer\s+/i, '');
   const cronSecret = req.headers.get('x-cron-secret') || '';
-  const isCron = !!cronSecret && cronSecret === Deno.env.get('CRON_SECRET');
 
   const service = createClient(SB_URL, SB_SERVICE, { auth: { persistSession: false, autoRefreshToken: false } });
   const userDb = createClient(SB_URL, SB_ANON, {
@@ -179,13 +178,24 @@ export function createClientFromRequest(req: Request) {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
+  // Az ütemezett hívás titka az adatbázis vaultjában él (public.cron_secret, csak service_role).
+  let cronCache: string | null = null;
+  const getCronSecret = async () => {
+    if (cronCache === null) {
+      const { data } = await service.rpc('cron_secret');
+      cronCache = typeof data === 'string' ? data : '';
+    }
+    return cronCache;
+  };
+  const isCronCall = async () => !!cronSecret && cronSecret === (await getCronSecret());
+
   const functions = {
     invoke: async (name: string, body: unknown = {}) => {
       const res = await fetch(`${SB_URL}/functions/v1/${name}`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${SB_SERVICE}`,
-          'x-cron-secret': Deno.env.get('CRON_SECRET') ?? '',
+          'x-cron-secret': await getCronSecret(),
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
@@ -199,7 +209,7 @@ export function createClientFromRequest(req: Request) {
   return {
     auth: {
       me: async () => {
-        if (isCron) return { id: 'system', email: 'system', role: 'admin', account_id: '', full_name: 'Rendszer' };
+        if (await isCronCall()) return { id: 'system', email: 'system', role: 'admin', account_id: '', full_name: 'Rendszer' };
         if (!bearer || bearer === SB_ANON) return null;
         const { data, error } = await service.auth.getUser(bearer);
         if (error || !data?.user) return null;

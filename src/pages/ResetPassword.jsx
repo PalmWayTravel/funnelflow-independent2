@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "@/api/base44Client";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,8 +9,18 @@ import { Lock, Loader2, AlertTriangle } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 
 export default function ResetPassword() {
-  const [searchParams] = useSearchParams();
-  const resetToken = searchParams.get("token");
+  // A Supabase a visszaállító / meghívó linkre kattintva már bejelentkeztet (helyreállító munkamenet),
+  // ezért itt nincs külön token: elég, ha van munkamenet.
+  const [resetToken, setResetToken] = useState(null);
+  const [checking, setChecking] = useState(true);
+  useEffect(() => {
+    let done = false;
+    const finish = (ok) => { if (!done) { done = true; setResetToken(ok ? "session" : null); setChecking(false); } };
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => { if (session) finish(true); });
+    supabase.auth.getSession().then(({ data }) => { if (data.session) finish(true); });
+    const t = setTimeout(() => finish(false), 2500);
+    return () => { clearTimeout(t); sub.subscription.unsubscribe(); };
+  }, []);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,6 +45,7 @@ export default function ResetPassword() {
     }
   };
 
+  if (checking) return null;
   if (!resetToken) {
     return (
       <AuthLayout
